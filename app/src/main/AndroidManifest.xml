@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mta.vengage.leisuretime">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+
+
+        <activity
+            android:name=".Main"
+            android:theme="@style/AppTheme"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".MovieActivity"
+            android:label="@string/title_activity_movie"
+            android:theme="@style/MovieActivity"
+            android:parentActivityName=".Main">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mta.vengage.leisuretime.Main" />
+        </activity>
+
+
+        <activity
+            android:name=".DetailActivity"
+            android:theme="@style/DetailTheme"
+            android:label="@string/todays_weather"
+            android:parentActivityName=".Main">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mta.vengage.leisuretime.Main" />
+        </activity>
+
+
+        <activity
+            android:name=".SettingsActivity"
+            android:theme="@style/SettingsTheme"
+            android:label="@string/settings"
+            android:parentActivityName=".Main">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mta.vengage.leisuretime.Main" />
+        </activity>
+
+
+        <provider
+            android:authorities="com.mta.vengage.leisuretime"
+            android:name=".data.WeatherProvider"
+            android:exported="false"
+            android:syncable="false"/>
+    </application>
+
+</manifest>

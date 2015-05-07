@@ -1,0 +1,17 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#cccccc</color>
+    <color name="grey_700">#646464</color>
+    <color name="black">#000000</color>
+
+
+    <color name="leisure_time_notification_bar">#E64A19</color>
+    <color name="leisure_time_action_bar">#FF5722</color>
+    <color name="orange_600">#F4511E</color>
+    <color name="orange_400">#FF7043</color>
+    <color name="orange_200">#FFAB91</color>
+    <color name="orange_50">#FBE9E7</color>
+
+</resources>

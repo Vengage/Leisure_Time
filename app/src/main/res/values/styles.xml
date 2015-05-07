@@ -1,0 +1,38 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimaryDark">@color/leisure_time_notification_bar</item>
+        <item name="colorPrimary">@color/leisure_time_action_bar</item>
+    </style>
+
+
+    <!-- Movie activity theme -->
+    <style name="MovieActivity" parent="AppTheme">
+        <item name="actionBarStyle">@style/ActionBar.Solid.LeisureTime.NoTitle</item>
+    </style>
+
+    <!-- Main activity theme. -->
+    <style name="DetailTheme" parent="AppTheme">
+        <item name="actionBarStyle">@style/ActionBar.Solid.LeisureTime.NoTitle</item>
+    </style>
+
+    <!-- Settings activity theme. -->
+    <style name="SettingsTheme" parent="AppTheme">
+        <item name="actionBarStyle">@style/ActionBar.Solid.LeisureTime.NoTitle</item>
+    </style>
+
+    <!-- main activity action bar styles -->
+    <style name="ActionBar.Solid.LeisureTime.NoTitle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="displayOptions">homeAsUp|showTitle</item>
+        <item name="android:homeAsUpIndicator">@mipmap/ic_launcher</item>
+        <item name="homeAsUpIndicator">@mipmap/ic_launcher</item>
+    </style>
+
+    <!-- Style for forecast listview -->
+    <style name="ForecastListStyle">
+        <!-- Here it's a stub.  In screens of sufficient width, this style includes modifications
+        for two-pane layout -->
+    </style>
+
+</resources>
