@@ -22,8 +22,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mta.vengage.leisuretime.data.WeatherContract;
-import com.mta.vengage.leisuretime.data.WeatherContract.WeatherEntry;
+import com.mta.vengage.leisuretime.data.TablesContract;
+import com.mta.vengage.leisuretime.data.TablesContract.WeatherEntry;
 
 
 
@@ -112,7 +112,7 @@ public class DetailActivity extends ActionBarActivity {
                 WeatherEntry.COLUMN_WEATHER_ID,
                 // This works because the WeatherProvider returns location data joined with
                 // weather data, even though they're stored in two different tables.
-                WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING
+                TablesContract.LocationEntry.COLUMN_LOCATION_SETTING
         };
 
         // These indices are tied to DETAIL_COLUMNS.  If DETAIL_COLUMNS changes, these
@@ -203,8 +203,8 @@ public class DetailActivity extends ActionBarActivity {
             // replace the uri, since the location has changed
             Uri uri = mUri;
             if (null != uri) {
-                long date = WeatherContract.WeatherEntry.getDateFromUri(uri);
-                Uri updatedUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(newLocation, date);
+                long date = TablesContract.WeatherEntry.getDateFromUri(uri);
+                Uri updatedUri = TablesContract.WeatherEntry.buildWeatherLocationWithDate(newLocation, date);
                 mUri = updatedUri;
                 getLoaderManager().restartLoader(DETAIL_LOADER, null, this);
             }

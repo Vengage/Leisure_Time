@@ -9,8 +9,8 @@ import android.os.AsyncTask;
 import android.text.format.Time;
 import android.util.Log;
 
-import com.mta.vengage.leisuretime.data.WeatherContract.WeatherEntry;
-import com.mta.vengage.leisuretime.data.WeatherContract;
+import com.mta.vengage.leisuretime.data.TablesContract.WeatherEntry;
+import com.mta.vengage.leisuretime.data.TablesContract;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,14 +54,14 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 
         // First, check if the location with this city name exists in the db
         Cursor locationCursor = mContext.getContentResolver().query(
-                WeatherContract.LocationEntry.CONTENT_URI,
-                new String[]{WeatherContract.LocationEntry._ID},
-                WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ?",
+                TablesContract.LocationEntry.CONTENT_URI,
+                new String[]{TablesContract.LocationEntry._ID},
+                TablesContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ?",
                 new String[]{locationSetting},
                 null);
 
         if (locationCursor.moveToFirst()) {
-            int locationIdIndex = locationCursor.getColumnIndex(WeatherContract.LocationEntry._ID);
+            int locationIdIndex = locationCursor.getColumnIndex(TablesContract.LocationEntry._ID);
             locationId = locationCursor.getLong(locationIdIndex);
         } else {
             // Now that the content provider is set up, inserting rows of data is pretty simple.
@@ -70,14 +70,14 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 
             // Then add the data, along with the corresponding name of the data type,
             // so the content provider knows what kind of value is being inserted.
-            locationValues.put(WeatherContract.LocationEntry.COLUMN_CITY_NAME, cityName);
-            locationValues.put(WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING, locationSetting);
-            locationValues.put(WeatherContract.LocationEntry.COLUMN_COORD_LAT, lat);
-            locationValues.put(WeatherContract.LocationEntry.COLUMN_COORD_LONG, lon);
+            locationValues.put(TablesContract.LocationEntry.COLUMN_CITY_NAME, cityName);
+            locationValues.put(TablesContract.LocationEntry.COLUMN_LOCATION_SETTING, locationSetting);
+            locationValues.put(TablesContract.LocationEntry.COLUMN_COORD_LAT, lat);
+            locationValues.put(TablesContract.LocationEntry.COLUMN_COORD_LONG, lon);
 
             // Finally, insert location data into the database.
             Uri insertedUri = mContext.getContentResolver().insert(
-                    WeatherContract.LocationEntry.CONTENT_URI,
+                    TablesContract.LocationEntry.CONTENT_URI,
                     locationValues
             );
 

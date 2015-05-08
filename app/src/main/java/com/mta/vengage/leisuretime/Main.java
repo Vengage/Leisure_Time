@@ -10,15 +10,15 @@ import android.text.format.Time;
 import android.view.View;
 import android.widget.Button;
 
-import com.mta.vengage.leisuretime.data.WeatherContract;
-import com.mta.vengage.leisuretime.data.WeatherContract.WeatherEntry;
+import com.mta.vengage.leisuretime.data.TablesContract;
+import com.mta.vengage.leisuretime.data.TablesContract.WeatherEntry;
 
 public class Main extends Activity {
 
     static final String DETAIL_URI = "URI";
 
     private static final String[] DETAIL_COLUMNS = {
-            WeatherEntry.TABLE_NAME + "." + WeatherContract.WeatherEntry._ID,
+            WeatherEntry.TABLE_NAME + "." + TablesContract.WeatherEntry._ID,
             WeatherEntry.COLUMN_DATE,
             WeatherEntry.COLUMN_SHORT_DESC,
             WeatherEntry.COLUMN_MAX_TEMP,
@@ -30,7 +30,7 @@ public class Main extends Activity {
             WeatherEntry.COLUMN_WEATHER_ID,
             // This works because the WeatherProvider returns location data joined with
             // weather data, even though they're stored in two different tables.
-            WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING
+            TablesContract.LocationEntry.COLUMN_LOCATION_SETTING
     };
 
     // These indices are tied to DETAIL_COLUMNS.  If DETAIL_COLUMNS changes, these
@@ -87,13 +87,13 @@ public class Main extends Activity {
                 dayTime = new Time();
                 long datetime = dayTime.setJulianDay(julianStartDay);
 
-                Uri mUri = WeatherContract.WeatherEntry.buildWeatherLocation("94043");
+                Uri mUri = TablesContract.WeatherEntry.buildWeatherLocation("94043");
                 Cursor cursor = getContentResolver().query(mUri, DETAIL_COLUMNS, null, null, null);
                 cursor.moveToNext();
                 if (cursor != null) {
                     String locationSetting = Utility.getPreferredLocation(getApplicationContext());
                     Intent intent = new Intent(getApplicationContext(), DetailActivity.class)
-                            .setData(WeatherContract.WeatherEntry.buildWeatherLocationWithDate(
+                            .setData(TablesContract.WeatherEntry.buildWeatherLocationWithDate(
                                     locationSetting, cursor.getLong(COL_WEATHER_DATE)
                             ));
                     startActivity(intent);

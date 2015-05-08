@@ -57,8 +57,14 @@
 
 
         <provider
-            android:authorities="com.mta.vengage.leisuretime"
+            android:authorities="com.mta.vengage.leisuretime.app"
             android:name=".data.WeatherProvider"
+            android:exported="false"
+            android:syncable="false"/>
+
+        <provider
+            android:authorities="com.mta.vengage.leisuretime.app"
+            android:name=".data.CinemaProvider"
             android:exported="false"
             android:syncable="false"/>
     </application>

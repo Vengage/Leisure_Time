@@ -11,16 +11,17 @@ import android.text.format.Time;
  *
  * Contract in care sunt declarate numele de coloane pentru tabele din baza de date
  */
-public class WeatherContract {
+public class TablesContract {
 
 
-    public static final String CONTENT_AUTHORITY = "com.mta.vengage.leisuretime";
+    public static final String CONTENT_AUTHORITY = "com.mta.vengage.leisuretime.app";
 
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     public static final String PATH_WEATHER = "weather";
     public static final String PATH_LOCATION = "location";
-    public static final String PATH_CINEMA = "cinema";
+    public static final String PATH_MOVIES = "movies";
+    public static final String PATH_PROGRAM = "program";
 
     public static long normalizeDate(long startDate) {
         Time time = new Time();
@@ -110,6 +111,8 @@ public class WeatherContract {
             return CONTENT_URI.buildUpon().appendPath(locationSetting).build();
         }
 
+        ///                                  locationSetting    date as parameter
+        // content://com.mta.vengage.leisuretime.app/94043?date=1423400000
         public static Uri buildWeatherLocationWithStartDate(
                 String locationSetting, long startDate) {
             long normalizedDate = normalizeDate(startDate);
@@ -139,18 +142,21 @@ public class WeatherContract {
         }
     }
 
-    public static final class CinemaEntry implements BaseColumns {
+    public static final class MoviesEntry implements BaseColumns {
 
         public static final Uri CONTENT_URI =
-                BASE_CONTENT_URI.buildUpon().appendPath(PATH_CINEMA).build();
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_MOVIES).build();
 
         public static final String CONTENT_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CINEMA;
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MOVIES;
         public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CINEMA;
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MOVIES;
 
         // Numele tabelului
-        public static final String TABLE_NAME = "program_cinema";
+        public static final String TABLE_NAME = "movies";
+
+        // Id-ul filmului
+        public static final String COlUMN_MOVIE_ID = "movie_id";
 
         // Durata filmului
         public static final String COLUMN_DURATION = "duration";
@@ -173,23 +179,69 @@ public class WeatherContract {
         // Synopsis film
         public static final String COLUMN_SYNOPSIS = "synopsis";
 
-        // Ora si data difuzarii
-        public static final String COLUMN_HOUR = "hour";
-
-        // Numarul de locuri din sala
-        public static final String COLUMN_NR_SEATS = "nr_seats";
-
-        // Sala ocupata
-        public static final String COLUMN_OCUPIED = "ocupied";
-
-        // Numarul salii
-        public static final String COLUMN_SALA_ID = "sala_id";
-
-        public static Uri buildCinemaUri(long id) {
+        // content://com.mta.vengage.leisuretime.app/movies
+        public static Uri buildMoviesUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
 
+        // content://com.mta.vengage.leisuretime.app/movies/1
+        public static Uri buildMoviesMoviesUri() {
+            return CONTENT_URI.buildUpon().appendPath("1").build();
+        }
+
+        // content://com.mta.vengage.leisuretime.app/movies?movie_id=8
+        public static Uri buildMoviesMovieUri(String movie_id){
+            return CONTENT_URI.buildUpon().appendQueryParameter(COlUMN_MOVIE_ID, movie_id).build();
+        }
+
+        public static long getMovidIDFromUri(Uri uri){
+            String movieString = uri.getQueryParameter(COlUMN_MOVIE_ID);
+            if( null != movieString && movieString.length() > 0 ){
+                return Long.parseLong(movieString);
+            }
+            else {
+                return 0;
+            }
+        }
     }
 
+    public static final class ProgramEntry implements BaseColumns {
 
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_PROGRAM).build();
+
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PROGRAM;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PROGRAM;
+
+
+        //  Numele tabelului
+        public static final String TABLE_NAME = "program";
+        // ID-ul filmului
+        public static final String COLUMN_MOVIE_ID = "movie_id";
+
+        // Ora si data difuzarii
+        public static final String COLUMN_HOUR = "hour";
+
+        // content://com.mta.vengage.leisuretime.app/program
+        public static Uri buildProgramUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+        // content://com.mta.vengage.leisuretime.app/program?movie_id=8
+        public static Uri buildMovieProgramUri(String movie_id){
+            return CONTENT_URI.buildUpon().appendQueryParameter(COLUMN_MOVIE_ID,movie_id).build();
+        }
+
+        public static Integer getMovidIDFromUri(Uri uri){
+            String movieString = uri.getQueryParameter(COLUMN_MOVIE_ID);
+            if( null != movieString && movieString.length() > 0 ){
+                return Integer.parseInt(movieString);
+            }
+            else {
+                return 0;
+            }
+        }
+    }
 }
