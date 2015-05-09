@@ -119,7 +119,7 @@ public class CinemaProvider extends ContentProvider{
             case MOVIES: // asta poate fi stearsa daca este duplicat
             {
                 retCursor = mOpenHelper.getReadableDatabase().query(
-                        TablesContract.WeatherEntry.TABLE_NAME,
+                        TablesContract.MoviesEntry.TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
@@ -349,8 +349,8 @@ public class CinemaProvider extends ContentProvider{
 
     static UriMatcher buildUriMatcher(){
 
-        final UriMatcher matcher = new UriMatcher((UriMatcher.NO_MATCH));
-        final String authority = TablesContract.CONTENT_AUTHORITY;
+        final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
+        final String authority = TablesContract.CONTENT_AUTHORITY_CS;
 
         // For each type of URI that we created , we create a corresponding code.
         matcher.addURI(authority, TablesContract.PATH_MOVIES, MOVIES);

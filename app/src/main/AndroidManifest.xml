@@ -63,7 +63,7 @@
             android:syncable="false"/>
 
         <provider
-            android:authorities="com.mta.vengage.leisuretime.app"
+            android:authorities="com.mta.vengage.leisuretime.app.cs"
             android:name=".data.CinemaProvider"
             android:exported="false"
             android:syncable="false"/>

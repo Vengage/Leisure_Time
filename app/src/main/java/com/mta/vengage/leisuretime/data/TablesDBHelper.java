@@ -18,7 +18,7 @@ import com.mta.vengage.leisuretime.data.TablesContract.WeatherEntry;
 public class TablesDBHelper extends SQLiteOpenHelper {
 
     // La orice modificare versiunea bazei de date trebuie incrementata manual
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     static final String DATABASE_NAME = "leisuretime.db";
 
@@ -73,7 +73,7 @@ public class TablesDBHelper extends SQLiteOpenHelper {
                 MoviesEntry.COLUMN_GENRE + " TEXT NOT NULL, " +
                 MoviesEntry.COLUMN_MIN_AGE + " INTEGER NOT NULL, " +
                 MoviesEntry.COLUMN_TYPE + " TEXT NOT NULL, " +
-                MoviesEntry.COLUMN_POSTER + " BLOB NOT NULL, " +
+                MoviesEntry.COLUMN_POSTER + " TEXT NOT NULL, " +
                 MoviesEntry.COLUMN_SYNOPSIS + " TEXT NOT NULL" +
                 ");";
 

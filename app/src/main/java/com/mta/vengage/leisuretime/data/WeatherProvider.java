@@ -124,7 +124,7 @@ public class WeatherProvider extends ContentProvider {
     }
 
     /*
-        Students: We've coded this for you.  We just create a new WeatherDbHelper for later use
+        Students: We've coded this for you.  We just create a new TablesDBHelper for later use
         here.
      */
     @Override

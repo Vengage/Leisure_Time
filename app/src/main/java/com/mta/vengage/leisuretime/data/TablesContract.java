@@ -14,9 +14,15 @@ import android.text.format.Time;
 public class TablesContract {
 
 
+    // This is the content authority for the WeatherProvider
     public static final String CONTENT_AUTHORITY = "com.mta.vengage.leisuretime.app";
 
+    // This is the content authority for the CinemaProvider
+    // CS comes from Cinema Service
+    public static final String CONTENT_AUTHORITY_CS = "com.mta.vengage.leisuretime.app.cs";
+
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    public static final Uri BASE_CONTENT_URI_CS = Uri.parse("content://" + CONTENT_AUTHORITY_CS);
 
     public static final String PATH_WEATHER = "weather";
     public static final String PATH_LOCATION = "location";
@@ -145,12 +151,12 @@ public class TablesContract {
     public static final class MoviesEntry implements BaseColumns {
 
         public static final Uri CONTENT_URI =
-                BASE_CONTENT_URI.buildUpon().appendPath(PATH_MOVIES).build();
+                BASE_CONTENT_URI_CS.buildUpon().appendPath(PATH_MOVIES).build();
 
         public static final String CONTENT_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MOVIES;
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY_CS + "/" + PATH_MOVIES;
         public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MOVIES;
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY_CS + "/" + PATH_MOVIES;
 
         // Numele tabelului
         public static final String TABLE_NAME = "movies";
@@ -179,17 +185,18 @@ public class TablesContract {
         // Synopsis film
         public static final String COLUMN_SYNOPSIS = "synopsis";
 
-        // content://com.mta.vengage.leisuretime.app/movies
+        // content://com.mta.vengage.leisuretime.app.cs/movies
         public static Uri buildMoviesUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
 
-        // content://com.mta.vengage.leisuretime.app/movies/1
+        // content://com.mta.vengage.leisuretime.app.cs/movies/1
         public static Uri buildMoviesMoviesUri() {
-            return CONTENT_URI.buildUpon().appendPath("1").build();
+            Uri uri = CONTENT_URI.buildUpon().appendPath("1").build();
+            return uri;
         }
 
-        // content://com.mta.vengage.leisuretime.app/movies?movie_id=8
+        // content://com.mta.vengage.leisuretime.app.cs/movies?movie_id=8
         public static Uri buildMoviesMovieUri(String movie_id){
             return CONTENT_URI.buildUpon().appendQueryParameter(COlUMN_MOVIE_ID, movie_id).build();
         }
@@ -208,12 +215,12 @@ public class TablesContract {
     public static final class ProgramEntry implements BaseColumns {
 
         public static final Uri CONTENT_URI =
-                BASE_CONTENT_URI.buildUpon().appendPath(PATH_PROGRAM).build();
+                BASE_CONTENT_URI_CS.buildUpon().appendPath(PATH_PROGRAM).build();
 
         public static final String CONTENT_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PROGRAM;
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY_CS + "/" + PATH_PROGRAM;
         public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PROGRAM;
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY_CS + "/" + PATH_PROGRAM;
 
 
         //  Numele tabelului
@@ -224,12 +231,12 @@ public class TablesContract {
         // Ora si data difuzarii
         public static final String COLUMN_HOUR = "hour";
 
-        // content://com.mta.vengage.leisuretime.app/program
+        // content://com.mta.vengage.leisuretime.app.cs/program
         public static Uri buildProgramUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
 
-        // content://com.mta.vengage.leisuretime.app/program?movie_id=8
+        // content://com.mta.vengage.leisuretime.app.cs/program?movie_id=8
         public static Uri buildMovieProgramUri(String movie_id){
             return CONTENT_URI.buildUpon().appendQueryParameter(COLUMN_MOVIE_ID,movie_id).build();
         }

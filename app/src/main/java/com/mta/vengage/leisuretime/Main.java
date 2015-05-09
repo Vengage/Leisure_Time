@@ -87,7 +87,7 @@ public class Main extends Activity {
                 dayTime = new Time();
                 long datetime = dayTime.setJulianDay(julianStartDay);
 
-                Uri mUri = TablesContract.WeatherEntry.buildWeatherLocation("94043");
+                Uri mUri = TablesContract.WeatherEntry.buildWeatherLocation(Utility.getPreferredLocation(getApplicationContext()));
                 Cursor cursor = getContentResolver().query(mUri, DETAIL_COLUMNS, null, null, null);
                 cursor.moveToNext();
                 if (cursor != null) {
