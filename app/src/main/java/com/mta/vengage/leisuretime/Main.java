@@ -127,6 +127,10 @@ public class Main extends Activity {
         Date dt = new Date(System.currentTimeMillis());
         String currentDate = "\"" + timeFormat.format(dt) + "\"";
 
+
+        getContentResolver().delete(TablesContract.MoviesEntry.CONTENT_URI,null,null);
+        getContentResolver().delete(TablesContract.ProgramEntry.CONTENT_URI,null,null);
+
         cinemaTask.execute(currentDate);
     }
 }

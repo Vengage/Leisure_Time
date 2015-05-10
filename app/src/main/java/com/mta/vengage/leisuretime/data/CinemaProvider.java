@@ -58,7 +58,10 @@ public class CinemaProvider extends ContentProvider{
             + TablesContract.ProgramEntry.COLUMN_MOVIE_ID + " = ?";
 
     private  Cursor getMovies(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder){
-            return new SQLiteQueryBuilder().query(mOpenHelper.getReadableDatabase(),
+
+            SQLiteQueryBuilder moviesQueryBuilder = new SQLiteQueryBuilder();
+            moviesQueryBuilder.setTables(TablesContract.MoviesEntry.TABLE_NAME);
+            return moviesQueryBuilder.query(mOpenHelper.getReadableDatabase(),
                     projection,
                     selection,
                     selectionArgs,
