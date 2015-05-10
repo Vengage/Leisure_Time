@@ -275,7 +275,11 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
                     .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
                     .build();
 
+            Log.d("URL pentru OWM", builtUri.toString());
+
             URL url = new URL(builtUri.toString());
+
+            Log.d("URL pentru OWM din URL", url.toString());
 
             // Create the request to OpenWeatherMap, and open the connection
             urlConnection = (HttpURLConnection) url.openConnection();
