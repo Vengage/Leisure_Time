@@ -13,6 +13,10 @@ import android.widget.Button;
 import com.mta.vengage.leisuretime.data.TablesContract;
 import com.mta.vengage.leisuretime.data.TablesContract.WeatherEntry;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
 public class Main extends Activity {
 
     static final String DETAIL_URI = "URI";
@@ -60,7 +64,7 @@ public class Main extends Activity {
         }, 3000);
     }
 
-    private void setupMainPage(){
+    private void setupMainPage() {
 
         Button movie = (Button) findViewById(R.id.movieButton);
         Button weather = (Button) findViewById(R.id.weatherButton);
@@ -105,12 +109,24 @@ public class Main extends Activity {
 
         // Aici vom prelua datele pentru cursorul nostru si vom popula tabelul
         updateWeather();
+        updateCinemaService();
     }
 
 
-    private void updateWeather(){
+    private void updateWeather() {
         FetchWeatherTask weatherTask = new FetchWeatherTask(getApplicationContext());
         String location = Utility.getPreferredLocation(getApplicationContext());
         weatherTask.execute(location);
+    }
+
+    private void updateCinemaService() {
+        FetchCinemaTask cinemaTask = new FetchCinemaTask(getApplicationContext());
+
+        SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+        Date dt = new Date(System.currentTimeMillis());
+        String currentDate = "\"" + timeFormat.format(dt) + "\"";
+
+        cinemaTask.execute(currentDate);
     }
 }

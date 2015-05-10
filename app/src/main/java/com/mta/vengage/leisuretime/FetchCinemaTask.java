@@ -182,7 +182,7 @@ public class FetchCinemaTask extends AsyncTask<String, Void, Void> {
 
         // Construct the URL for the CinemaService query
         final String CINEMA_SERVICE_BASE_URL =
-                "http://localhost/CinemaService/?";
+                "http://10.0.3.2/CinemaService/?";
         final String QUERY_MOVIES_PARAM = "movies";
         final String QUERY_HOURS_PARAM = "date";
 
@@ -195,6 +195,9 @@ public class FetchCinemaTask extends AsyncTask<String, Void, Void> {
 
         try {
             URL url = new URL(moviesUri.toString());
+
+            Log.d("Movies URL", url.toString());
+
 
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
@@ -239,6 +242,7 @@ public class FetchCinemaTask extends AsyncTask<String, Void, Void> {
         try {
             URL url = new URL(programUri.toString());
 
+            Log.d("Program URI",url.toString());
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
