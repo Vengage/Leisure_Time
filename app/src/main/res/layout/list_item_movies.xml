@@ -16,12 +16,13 @@
     <!-- Movie Title -->
     <TextView
         android:id="@+id/title_movie"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
         android:textSize="@dimen/title"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/orange_600" />
 
     <!-- Duration -->
     <TextView
@@ -31,7 +32,8 @@
         android:layout_below="@id/title_movie"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/thumbnail"
-        android:textSize="@dimen/rating" />
+        android:textSize="@dimen/rating"
+        android:textColor="@color/genre" />
 
     <!-- Genre -->
     <TextView
@@ -53,5 +55,12 @@
         android:layout_alignParentRight="true"
         android:textColor="@color/year"
         android:textSize="@dimen/year" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+       android:visibility="gone"
+        android:id="@+id/movie_id" />
 
 </RelativeLayout>

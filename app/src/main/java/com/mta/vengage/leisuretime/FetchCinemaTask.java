@@ -79,7 +79,7 @@ public class FetchCinemaTask extends AsyncTask<String, Void, Void> {
                 synopsis = filmJson.getString(CS_SYNOPSIS);
 
                 ContentValues movieValues = new ContentValues();
-                movieValues.put(TablesContract.MoviesEntry.COlUMN_MOVIE_ID, film_id);
+                movieValues.put(TablesContract.MoviesEntry.COLUMN_MOVIE_ID, film_id);
                 movieValues.put(TablesContract.MoviesEntry.COLUMN_NAME, name);
                 movieValues.put(TablesContract.MoviesEntry.COLUMN_DURATION, duration);
                 movieValues.put(TablesContract.MoviesEntry.COLUMN_MIN_AGE, min_age);

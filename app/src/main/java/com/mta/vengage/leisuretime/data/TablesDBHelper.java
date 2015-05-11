@@ -67,7 +67,7 @@ public class TablesDBHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_MOVIES_TABLE = "CREATE TABLE " + MoviesEntry.TABLE_NAME + " (" +
                 MoviesEntry._ID + " INTEGER PRIMARY KEY, " +
 
-                MoviesEntry.COlUMN_MOVIE_ID + " INTEGER UNIQUE NOT NULL, " +
+                MoviesEntry.COLUMN_MOVIE_ID + " INTEGER UNIQUE NOT NULL, " +
                 MoviesEntry.COLUMN_NAME + " TEXT NOT NULL, " +
                 MoviesEntry.COLUMN_DURATION + " INTEGER NOT NULL, " + // in minutes
                 MoviesEntry.COLUMN_GENRE + " TEXT NOT NULL, " +
@@ -84,7 +84,7 @@ public class TablesDBHelper extends SQLiteOpenHelper {
                 ProgramEntry.COLUMN_HOUR + " TEXT NOT NULL, " +
 
                 " FOREIGN KEY (" +  ProgramEntry.COLUMN_MOVIE_ID  + ") REFERENCES " +
-                MoviesEntry.TABLE_NAME + " (" + MoviesEntry.COlUMN_MOVIE_ID + ")" +
+                MoviesEntry.TABLE_NAME + " (" + MoviesEntry.COLUMN_MOVIE_ID + ")" +
                 ");";
 
 

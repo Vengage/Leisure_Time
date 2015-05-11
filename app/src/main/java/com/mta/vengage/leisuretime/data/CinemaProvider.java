@@ -43,7 +43,7 @@ public class CinemaProvider extends ContentProvider{
                 TablesContract.MoviesEntry.TABLE_NAME + " INNER JOIN " +
                         TablesContract.ProgramEntry.TABLE_NAME + " ON "
                 + TablesContract.MoviesEntry.TABLE_NAME + "."
-                + TablesContract.MoviesEntry.COlUMN_MOVIE_ID + "="
+                + TablesContract.MoviesEntry.COLUMN_MOVIE_ID + "="
                 + TablesContract.ProgramEntry.TABLE_NAME + "."
                         + TablesContract.ProgramEntry.COLUMN_MOVIE_ID
         );
@@ -78,7 +78,7 @@ public class CinemaProvider extends ContentProvider{
         String[] selectionArgs;
 
         if(movid_id == 0){
-            Log.d("CinemaProvider","You fucked up! About movie_id not taking 0");
+            Log.d("CinemaProvider","Movie Id's start at 1.");
             selection = null;
             selectionArgs = null;
         }
@@ -87,7 +87,7 @@ public class CinemaProvider extends ContentProvider{
             selectionArgs =  new  String[]{movid_id.toString()};
         }
 
-        return new SQLiteQueryBuilder().query(mOpenHelper.getReadableDatabase(),
+        return sMovieProgramQueryBuilder.query(mOpenHelper.getReadableDatabase(),
                 projection,
                 selection,
                 selectionArgs,

@@ -162,7 +162,7 @@ public class TablesContract {
         public static final String TABLE_NAME = "movies";
 
         // Id-ul filmului
-        public static final String COlUMN_MOVIE_ID = "movie_id";
+        public static final String COLUMN_MOVIE_ID = "movie_id";
 
         // Durata filmului
         public static final String COLUMN_DURATION = "duration";
@@ -198,11 +198,11 @@ public class TablesContract {
 
         // content://com.mta.vengage.leisuretime.app.cs/movies?movie_id=8
         public static Uri buildMoviesMovieUri(String movie_id){
-            return CONTENT_URI.buildUpon().appendQueryParameter(COlUMN_MOVIE_ID, movie_id).build();
+            return CONTENT_URI.buildUpon().appendQueryParameter(COLUMN_MOVIE_ID, movie_id).build();
         }
 
         public static long getMovidIDFromUri(Uri uri){
-            String movieString = uri.getQueryParameter(COlUMN_MOVIE_ID);
+            String movieString = uri.getQueryParameter(COLUMN_MOVIE_ID);
             if( null != movieString && movieString.length() > 0 ){
                 return Long.parseLong(movieString);
             }
