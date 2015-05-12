@@ -7,11 +7,8 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import com.mta.vengage.leisuretime.data.TablesContract;
@@ -20,10 +17,6 @@ import com.squareup.picasso.Picasso;
 
 public class MovieDetailActivity extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor>{
     private static final String LOG_TAG = MovieDetailActivity.class.getSimpleName();
-
-    private static final String MOVIE_DETAIL_SHARETAG = "#LeisureTime";
-
-    private ShareActionProvider shareActionProvider;
 
     private String mProgram;
     private static final int DETAIL_LOADER = 0;
@@ -82,29 +75,6 @@ public class MovieDetailActivity extends ActionBarActivity implements LoaderMana
 
         program_listview = (ListView) findViewById(R.id.program_listview);
 
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_movie_detail, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
