@@ -22,7 +22,7 @@ public class SplashScreen extends Activity {
         setContentView(R.layout.activity_splash_screen);
 
         updateWeather();
-        updateCinemaService();
+        ///updateCinemaService();
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -39,6 +39,10 @@ public class SplashScreen extends Activity {
     private void updateWeather() {
         FetchWeatherTask weatherTask = new FetchWeatherTask(getApplicationContext());
         String location = Utility.getPreferredLocation(getApplicationContext());
+
+        getContentResolver().delete(TablesContract.WeatherEntry.CONTENT_URI,null,null);
+        getContentResolver().delete(TablesContract.LocationEntry.CONTENT_URI,null,null);
+
         weatherTask.execute(location);
     }
 

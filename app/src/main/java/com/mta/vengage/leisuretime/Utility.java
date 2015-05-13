@@ -24,6 +24,12 @@ public class Utility {
                 .equals(context.getString(R.string.pref_units_metric));
     }
 
+    public static String getUnits(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getString(context.getString(R.string.pref_units_key),
+                context.getString(R.string.pref_units_metric));
+    }
+
     public static String formatTemperature(Context context, double temperature) {
         String suffix = "\u00B0";
         if (!isMetric(context)) {
@@ -55,7 +61,7 @@ public class Utility {
                     formatId,
                     today,
                     getFormattedMonthDay(context, dateInMillis)));
-        } else if ( julianDay < currentJulianDay + 7 ) {
+        } else if (julianDay < currentJulianDay + 7) {
             return getDayName(context, dateInMillis);
         } else {
             SimpleDateFormat shortenedDateFormat = new SimpleDateFormat("EEE MMM dd");
@@ -70,7 +76,7 @@ public class Utility {
         int currentJulianDay = Time.getJulianDay(System.currentTimeMillis(), t.gmtoff);
         if (julianDay == currentJulianDay) {
             return context.getString(R.string.today);
-        } else if ( julianDay == currentJulianDay +1 ) {
+        } else if (julianDay == currentJulianDay + 1) {
             return context.getString(R.string.tomorrow);
         } else {
             Time time = new Time();
@@ -80,7 +86,7 @@ public class Utility {
         }
     }
 
-    public static String getFormattedMonthDay(Context context, long dateInMillis ) {
+    public static String getFormattedMonthDay(Context context, long dateInMillis) {
         Time time = new Time();
         time.setToNow();
         SimpleDateFormat dbDateFormat = new SimpleDateFormat(Utility.DATE_FORMAT);

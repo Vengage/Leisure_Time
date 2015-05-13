@@ -12,7 +12,6 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.ShareActionProvider;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,7 +31,7 @@ public class DetailActivity extends ActionBarActivity {
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
 
     private String mLocation;
-
+    private String mUnits;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +39,8 @@ public class DetailActivity extends ActionBarActivity {
         setContentView(R.layout.activity_detail);
         getSupportActionBar().setElevation(0f);
 
-        mLocation =  Utility.getPreferredLocation(this);
-
+        mLocation = Utility.getPreferredLocation(getApplicationContext());
+        mUnits = Utility.getUnits(getApplicationContext());
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -49,6 +48,8 @@ public class DetailActivity extends ActionBarActivity {
                     .commit();
         }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,7 +61,8 @@ public class DetailActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            startActivity(new Intent(this, SettingsActivity.class));
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -73,9 +75,17 @@ public class DetailActivity extends ActionBarActivity {
         if(location != null && !location.equals(mLocation)){
             DetailFragment df = (DetailFragment) getSupportFragmentManager().findFragmentByTag(DETAILFRAGMENT_TAG);
             if(null != df){
-                df.onLocationChanged(location);
+                df.onLocationChanged();
             }
             mLocation = location;
+        }
+        String units = Utility.getUnits(this);
+        if(units != null && !units.equals(mUnits)){
+            DetailFragment df = (DetailFragment) getSupportFragmentManager().findFragmentByTag(DETAILFRAGMENT_TAG);
+            if(null != df){
+                df.onLocationChanged();
+            }
+            mUnits = units;
         }
     }
 
@@ -154,6 +164,7 @@ public class DetailActivity extends ActionBarActivity {
             mHumidityView = (TextView) rootView.findViewById(R.id.detail_humidity_textview);
             mWindView = (TextView) rootView.findViewById(R.id.detail_wind_textview);
             mPressureView = (TextView) rootView.findViewById(R.id.detail_pressure_textview);
+
             return rootView;
         }
 
@@ -184,28 +195,32 @@ public class DetailActivity extends ActionBarActivity {
             super.onActivityCreated(savedInstanceState);
         }
 
-        void onLocationChanged( String newLocation ) {
-            Uri uri = mUri;
-            if (null != uri) {
-                long date = TablesContract.WeatherEntry.getDateFromUri(uri);
-                Uri updatedUri = TablesContract.WeatherEntry.buildWeatherLocationWithDate(newLocation, date);
-                mUri = updatedUri;
-                getLoaderManager().restartLoader(DETAIL_LOADER, null, this);
-            }
+        void onLocationChanged() {
+            updateWeather();
+            getLoaderManager().restartLoader(DETAIL_LOADER, null, this);
         }
 
+        void updateWeather() {
+            FetchWeatherTask weatherTask = new FetchWeatherTask(getActivity());
+            String location = Utility.getPreferredLocation(getActivity());
+
+            getActivity().getContentResolver().delete(TablesContract.WeatherEntry.CONTENT_URI, null, null);
+            getActivity().getContentResolver().delete(TablesContract.LocationEntry.CONTENT_URI, null, null);
+
+            weatherTask.execute(location);
+        }
 
         @Override
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-            Log.v(LOG_TAG, "In onCreateLoader");
-            Intent intent = getActivity().getIntent();
-            if (intent == null) {
-                return null;
-            }
+
+            String locationSetting = Utility.getPreferredLocation(getActivity());
+            Uri weatherForLocationUri = TablesContract.WeatherEntry.buildWeatherLocationWithStartDate(locationSetting, System.currentTimeMillis());
+
+
 
             return new CursorLoader(
                     getActivity(),
-                    intent.getData(),
+                    weatherForLocationUri,
                     DETAIL_COLUMNS,
                     null,
                     null,

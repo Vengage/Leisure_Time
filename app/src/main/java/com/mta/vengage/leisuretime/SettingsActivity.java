@@ -1,10 +1,13 @@
 package com.mta.vengage.leisuretime;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 
 
 public class SettingsActivity extends PreferenceActivity
@@ -13,6 +16,7 @@ public class SettingsActivity extends PreferenceActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         addPreferencesFromResource(R.xml.pref_general);
 
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));
@@ -44,4 +48,14 @@ public class SettingsActivity extends PreferenceActivity
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()== android.R.id.home) {
+            Intent intent = NavUtils.getParentActivityIntent(this);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            NavUtils.navigateUpTo(this, intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

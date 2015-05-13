@@ -49,7 +49,6 @@ public class MovieActivity extends ActionBarActivity implements LoaderManager.Lo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
 
-
         Uri moviesUri = TablesContract.MoviesEntry.buildMoviesMoviesUri();
         Cursor cursor = getApplicationContext().getContentResolver().query(moviesUri, null, null, null, null);
         mMovieAdapter = new MoviesAdapter(getApplicationContext(), cursor, 0);

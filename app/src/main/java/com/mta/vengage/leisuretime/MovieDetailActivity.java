@@ -63,6 +63,7 @@ public class MovieDetailActivity extends ActionBarActivity implements LoaderMana
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
+
         getLoaderManager().initLoader(DETAIL_LOADER, null, this);
 
         title = (TextView) findViewById(R.id.title_movie);

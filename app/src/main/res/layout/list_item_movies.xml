@@ -56,4 +56,11 @@
         android:textColor="@color/year"
         android:textSize="@dimen/year" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+       android:visibility="gone"
+        android:id="@+id/movie_id" />
+
 </RelativeLayout>
