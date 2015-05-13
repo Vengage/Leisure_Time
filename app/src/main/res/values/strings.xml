@@ -12,21 +12,18 @@
     <string name="fun">Do you want to have some fun today?</string>
 
     <string name="title_activity_weather">WeatherActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_movie">Cinema</string>
 
     <string name="action_map">Map Location</string>
     <string name="action_share">Share</string>
 
-    <!-- Menu label to fetch updated weather info from the server -->
     <string name="action_refresh" translatable="false">Refresh</string>
     <string name="title_activity_detail">Details</string>
     <string name="title_activity_settings">Settings</string>
 
     <string name="pref_location_label">Locatie</string>
     <string name="pref_location_key" translatable="false">location</string>
-    <string name="pref_location_default" translatable="false">94043</string>
+    <string name="pref_location_default" translatable="false">Bucuresti</string>
     <string name="pref_units_label">Unitati temperatura</string>
     <string name="pref_units_label_metric">Metric</string>
     <string name="pref_units_label_imperial">Imperial</string>
@@ -35,32 +32,20 @@
     <string name="pref_units_imperial" translatable="false">imperial</string>
 
 
-
-    <!-- Language-specific constants -->
     <string name="today">Astazi</string>
 
-    <!-- For labelling tomorrow's forecast [CHAR LIMIT=15] -->
     <string name="tomorrow">Maine</string>
 
-
-
-    <!-- Date format [CHAR LIMIT=NONE] -->
     <string name="format_full_friendly_date"><xliff:g id="month">%1$s</xliff:g>, <xliff:g id="day">%2$s</xliff:g></string>
 
-    <!-- Strings for formatting weather-related data -->
-    <!-- Temperature format [CHAR LIMIT=5 -->
     <string name="format_temperature"><xliff:g id="temp">%1.0f</xliff:g>\u00B0</string>
 
-    <!-- Windspeed formats -->
-    <!-- Wind in mph [CHAR LIMIT=25] -->
     <string name="format_wind_mph">Vant: <xliff:g id="speed">%1$1.0f</xliff:g> mph <xliff:g id="direction">%2$s</xliff:g></string>
-    <!-- Wind in kph [CHAR LIMIT=25] -->
+
     <string name="format_wind_kmh">Vant: <xliff:g id="speed">%1$1.0f</xliff:g> km/h <xliff:g id="direction">%2$s</xliff:g></string>
 
-    <!-- Pressure format CHAR LIMIT=25] -->
     <string name="format_pressure">Presiunea: <xliff:g id="pressure">%1.0f</xliff:g> hPa</string>
 
-    <!-- Humidity format CHAR LIMIT=25]-->
     <string name="format_humidity">Umiditate: <xliff:g id="humidity">%1.0f</xliff:g> %%</string>
     <string name="todays_weather" translatable="false" >Vremea astazi</string>
     <string name="settings" translatable="false" >Setari</string>
@@ -71,7 +56,8 @@
     <string name="type">Tip</string>
     <string name="genre">Gen</string>
     <string name="synopsis">Synopsis</string>
-    <string name="program">Programs</string>
+    <string name="program">Program film:</string>
+    <string name="title_activity_splash_screen"></string>
 
 
 </resources>

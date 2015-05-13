@@ -5,17 +5,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.format.Time;
 import android.view.View;
 import android.widget.Button;
 
 import com.mta.vengage.leisuretime.data.TablesContract;
 import com.mta.vengage.leisuretime.data.TablesContract.WeatherEntry;
-
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.TimeZone;
 
 public class Main extends Activity {
 
@@ -32,13 +27,9 @@ public class Main extends Activity {
             WeatherEntry.COLUMN_WIND_SPEED,
             WeatherEntry.COLUMN_DEGREES,
             WeatherEntry.COLUMN_WEATHER_ID,
-            // This works because the WeatherProvider returns location data joined with
-            // weather data, even though they're stored in two different tables.
             TablesContract.LocationEntry.COLUMN_LOCATION_SETTING
     };
 
-    // These indices are tied to DETAIL_COLUMNS.  If DETAIL_COLUMNS changes, these
-    // must change.
     public static final int COL_WEATHER_ID = 0;
     public static final int COL_WEATHER_DATE = 1;
     public static final int COL_WEATHER_DESC = 2;
@@ -54,14 +45,9 @@ public class Main extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_screen);
+        setContentView(R.layout.activity_main);
 
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                setContentView(R.layout.activity_main);
-                setupMainPage();
-            }
-        }, 3000);
+        setupMainPage();
     }
 
     private void setupMainPage() {
@@ -80,10 +66,6 @@ public class Main extends Activity {
         weather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /// o sa crape sigur aici deoarece inca nu sunt implementate prerintele
-                //  si nici nu stiu daca o sa mearga cursorul
-                // trebuie t estat in debug
 
                 Time dayTime = new Time();
                 dayTime.setToNow();
@@ -107,30 +89,5 @@ public class Main extends Activity {
         });
 
 
-        // Aici vom prelua datele pentru cursorul nostru si vom popula tabelul
-        updateWeather();
-        updateCinemaService();
-    }
-
-
-    private void updateWeather() {
-        FetchWeatherTask weatherTask = new FetchWeatherTask(getApplicationContext());
-        String location = Utility.getPreferredLocation(getApplicationContext());
-        weatherTask.execute(location);
-    }
-
-    private void updateCinemaService() {
-        FetchCinemaTask cinemaTask = new FetchCinemaTask(getApplicationContext());
-
-        SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+3"));
-        Date dt = new Date(System.currentTimeMillis());
-        String currentDate = "\"" + timeFormat.format(dt) + "\"";
-
-
-        getContentResolver().delete(TablesContract.MoviesEntry.CONTENT_URI,null,null);
-        getContentResolver().delete(TablesContract.ProgramEntry.CONTENT_URI,null,null);
-
-        cinemaTask.execute(currentDate);
     }
 }

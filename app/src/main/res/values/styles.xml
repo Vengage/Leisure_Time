@@ -1,5 +1,12 @@
 <resources>
 
+
+    <!-- Splash screen -->
+    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/leisure_time_notification_bar</item>
+        <item name="colorPrimary">@color/leisure_time_action_bar</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimaryDark">@color/leisure_time_notification_bar</item>
@@ -29,10 +36,8 @@
         <item name="homeAsUpIndicator">@mipmap/ic_launcher</item>
     </style>
 
-    <!-- Style for forecast listview -->
+    <!-- Style for movies listview -->
     <style name="MoviesListStyle">
-        <!-- Here it's a stub.  In screens of sufficient width, this style includes modifications
-        for two-pane layout -->
     </style>
 
 </resources>

@@ -52,14 +52,12 @@ public class FetchCinemaTask extends AsyncTask<String, Void, Void> {
         try {
             JSONObject moviesJson = new JSONObject(moviesJsonStr);
 
-            // moviesJson.length() - returns the number of key/value pairs in the object
             Vector<ContentValues> cVVector = new Vector<ContentValues>(moviesJson.length());
-            // Numarul de filme din JSON
+
             for (int i = 1; i <= moviesJson.length(); i++) {
-                // luam primul film
-                // si adaugam datele in cVVector pentru a fi adaugate in tabel
+
                 JSONObject filmJson = moviesJson.getJSONObject(CS_FILM + i);
-                // declaratii variabile
+
                 int film_id;
                 String name;
                 int duration;
@@ -92,7 +90,7 @@ public class FetchCinemaTask extends AsyncTask<String, Void, Void> {
             }
 
             int inserted = 0;
-            // add to database
+
             if (cVVector.size() > 0) {
                 ContentValues[] cvArray = new ContentValues[cVVector.size()];
                 cVVector.toArray(cvArray);
@@ -124,14 +122,12 @@ public class FetchCinemaTask extends AsyncTask<String, Void, Void> {
 
             JSONObject programJson = new JSONObject(programJsonStr);
 
-            // moviesJson.length() - returns the number of key/value pairs in the object
             Vector<ContentValues> cVVector = new Vector<ContentValues>(programJson.length());
-            // Numarul de filme din JSON
+
             for (int i = 1; i <= programJson.length(); i++) {
-                // luam primul film
-                // si adaugam datele in cVVector pentru a fi adaugate in tabel
+
                 JSONObject filmJson = programJson.getJSONObject(CS_FILM + i);
-                // declaratii variabile
+
                 int film_id;
                 String ora;
 
@@ -168,19 +164,14 @@ public class FetchCinemaTask extends AsyncTask<String, Void, Void> {
             return null;
         }
 
-        // Data de la care incep filmele
-        String beginDate = params[0]; // data sub forma 2015-04-30 20:30:00
+        String beginDate = params[0];
 
-        // These two need to be declared outside the try/catch
-        // so that they can be closed in the finally block.
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
-        // Will contain the raw JSON response as a string.
         String moviesJsonStr;
         String programJsonStr;
 
-        // Construct the URL for the CinemaService query
         final String CINEMA_SERVICE_BASE_URL =
                 "http://10.0.3.2/CinemaService/?";
         final String QUERY_MOVIES_PARAM = "movies";

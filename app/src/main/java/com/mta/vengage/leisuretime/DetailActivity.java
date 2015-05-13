@@ -52,16 +52,12 @@ public class DetailActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.detail, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
@@ -83,9 +79,6 @@ public class DetailActivity extends ActionBarActivity {
         }
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
     public static class DetailFragment extends Fragment implements LoaderCallbacks<Cursor> {
 
         private static final String LOG_TAG = DetailFragment.class.getSimpleName();
@@ -110,13 +103,9 @@ public class DetailActivity extends ActionBarActivity {
                 WeatherEntry.COLUMN_WIND_SPEED,
                 WeatherEntry.COLUMN_DEGREES,
                 WeatherEntry.COLUMN_WEATHER_ID,
-                // This works because the WeatherProvider returns location data joined with
-                // weather data, even though they're stored in two different tables.
                 TablesContract.LocationEntry.COLUMN_LOCATION_SETTING
         };
 
-        // These indices are tied to DETAIL_COLUMNS.  If DETAIL_COLUMNS changes, these
-        // must change.
         public static final int COL_WEATHER_ID = 0;
         public static final int COL_WEATHER_DATE = 1;
         public static final int COL_WEATHER_DESC = 2;
@@ -170,16 +159,12 @@ public class DetailActivity extends ActionBarActivity {
 
         @Override
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-            // Inflate the menu; this adds items to the action bar if it is present.
             inflater.inflate(R.menu.detailfragment, menu);
 
-            // Retrieve the share menu item
             MenuItem menuItem = menu.findItem(R.id.action_share);
 
-            // Get the provider and hold onto it to set/change the share intent.
             mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
 
-            // If onLoadFinished happens before this, we can go ahead and set the share intent now.
             if (mForecast != null) {
                 mShareActionProvider.setShareIntent(createShareForecastIntent());
             }
@@ -200,7 +185,6 @@ public class DetailActivity extends ActionBarActivity {
         }
 
         void onLocationChanged( String newLocation ) {
-            // replace the uri, since the location has changed
             Uri uri = mUri;
             if (null != uri) {
                 long date = TablesContract.WeatherEntry.getDateFromUri(uri);
@@ -219,8 +203,6 @@ public class DetailActivity extends ActionBarActivity {
                 return null;
             }
 
-            // Now create and return a CursorLoader that will take care of
-            // creating a Cursor for the data being displayed.
             return new CursorLoader(
                     getActivity(),
                     intent.getData(),
@@ -234,55 +216,43 @@ public class DetailActivity extends ActionBarActivity {
         @Override
         public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
             if (data != null && data.moveToFirst()) {
-                // Read weather condition ID from cursor
                 int weatherId = data.getInt(COL_WEATHER_CONDITION_ID);
 
-                // Use weather art image
                 mIconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
 
-                // Read date from cursor and update views for day of week and date
                 long date = data.getLong(COL_WEATHER_DATE);
                 String friendlyDateText = Utility.getDayName(getActivity(), date);
                 String dateText = Utility.getFormattedMonthDay(getActivity(), date);
                 mFriendlyDateView.setText(friendlyDateText);
                 mDateView.setText(dateText);
 
-                // Read description from cursor and update view
                 String description = data.getString(COL_WEATHER_DESC);
                 mDescriptionView.setText(description);
 
-                // For accessibility, add a content description to the icon field
                 mIconView.setContentDescription(description);
 
-                // Read high temperature from cursor and update view
                 boolean isMetric = Utility.isMetric(getActivity());
 
                 double high = data.getDouble(COL_WEATHER_MAX_TEMP);
                 String highString = Utility.formatTemperature(getActivity(), high);
                 mHighTempView.setText(highString);
 
-                // Read low temperature from cursor and update view
                 double low = data.getDouble(COL_WEATHER_MIN_TEMP);
                 String lowString = Utility.formatTemperature(getActivity(), low);
                 mLowTempView.setText(lowString);
 
-                // Read humidity from cursor and update view
                 float humidity = data.getFloat(COL_WEATHER_HUMIDITY);
                 mHumidityView.setText(getActivity().getString(R.string.format_humidity, humidity));
 
-                // Read wind speed and direction from cursor and update view
                 float windSpeedStr = data.getFloat(COL_WEATHER_WIND_SPEED);
                 float windDirStr = data.getFloat(COL_WEATHER_DEGREES);
                 mWindView.setText(Utility.getFormattedWind(getActivity(), windSpeedStr, windDirStr));
 
-                // Read pressure from cursor and update view
                 float pressure = data.getFloat(COL_WEATHER_PRESSURE);
                 mPressureView.setText(getActivity().getString(R.string.format_pressure, pressure));
 
-                // We still need this for the share intent
                 mForecast = String.format("%s - %s - %s/%s", dateText, description, high, low);
 
-                // If onCreateOptionsMenu has already happened, we need to update the share intent now.
                 if (mShareActionProvider != null) {
                     mShareActionProvider.setShareIntent(createShareForecastIntent());
                 }
