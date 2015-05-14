@@ -31,7 +31,9 @@ android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:layout_height="251dp"
                     android:id="@+id/poster"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp" />
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -134,9 +136,9 @@ android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:text="@string/synopsis"
                     android:id="@+id/textView7"
                     android:textColor="@color/orange_600"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp" />
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp" />
 
                 <ScrollView
                     android:layout_width="fill_parent"
@@ -158,12 +160,24 @@ android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/program"
-                android:id="@+id/textView9" />
+                android:id="@+id/textView9"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/orange_600" />
 
-            <ListView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/program_listview" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/program"
+                android:layout_alignBottom="@+id/scrollView2"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp" />
+
         </LinearLayout>
     </ScrollView>
+
 </RelativeLayout>

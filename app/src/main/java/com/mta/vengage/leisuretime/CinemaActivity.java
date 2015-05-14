@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.mta.vengage.leisuretime.data.TablesContract;
 
 
-public class MovieActivity extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class CinemaActivity extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
 
     private static final int MOVIES_LOADER = 0;

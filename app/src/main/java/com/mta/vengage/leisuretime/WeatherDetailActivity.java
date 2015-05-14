@@ -26,7 +26,7 @@ import com.mta.vengage.leisuretime.data.TablesContract.WeatherEntry;
 
 
 
-public class DetailActivity extends ActionBarActivity {
+public class WeatherDetailActivity extends ActionBarActivity {
 
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
 

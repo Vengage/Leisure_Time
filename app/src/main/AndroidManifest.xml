@@ -17,7 +17,7 @@
         </activity>
 
         <activity
-            android:name=".MovieActivity"
+            android:name=".CinemaActivity"
             android:label="@string/title_activity_movie"
             android:parentActivityName=".Main"
             android:theme="@style/MovieActivity">
@@ -27,7 +27,7 @@
         </activity>
 
         <activity
-            android:name=".DetailActivity"
+            android:name=".WeatherDetailActivity"
             android:label="@string/todays_weather"
             android:parentActivityName=".Main"
             android:theme="@style/DetailTheme">
@@ -39,11 +39,11 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings"
-            android:parentActivityName=".DetailActivity"
+            android:parentActivityName=".WeatherDetailActivity"
             android:theme="@style/SettingsTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mta.vengage.leisuretime.DetailActivity" />
+                android:value=".WeatherDetailActivity" />
         </activity>
 
         <provider
@@ -60,10 +60,10 @@
         <activity
             android:name=".MovieDetailActivity"
             android:label="@string/title_activity_movie_detail"
-            android:parentActivityName=".MovieActivity">
+            android:parentActivityName=".CinemaActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mta.vengage.leisuretime.MovieActivity" />
+                android:value=".CinemaActivity" />
         </activity>
 
         <activity

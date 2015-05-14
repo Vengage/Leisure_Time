@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mta.vengage.leisuretime.data.TablesContract;
@@ -18,7 +17,6 @@ import com.squareup.picasso.Picasso;
 public class MovieDetailActivity extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor>{
     private static final String LOG_TAG = MovieDetailActivity.class.getSimpleName();
 
-    private String mProgram;
     private static final int DETAIL_LOADER = 0;
 
     private static final String[] PROGRAM_COLUMNS = {
@@ -46,10 +44,9 @@ public class MovieDetailActivity extends ActionBarActivity implements LoaderMana
     static final int COL_SYNOPSIS = 7;
 
     private static final int COL_MOVIE_ID = 0;
-
     private static final int COL_HOUR = 1;
-    private TextView title;
 
+    private TextView title;
     private TextView duration;
     private TextView genre;
     private TextView type;
@@ -57,7 +54,11 @@ public class MovieDetailActivity extends ActionBarActivity implements LoaderMana
     private TextView  min_age;
     private ImageView poster;
 
-    private ListView program_listview;
+    private TextView programView;
+
+
+    private String movie_id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,15 +75,16 @@ public class MovieDetailActivity extends ActionBarActivity implements LoaderMana
         min_age = (TextView) findViewById(R.id.min_age);
         poster = (ImageView) findViewById(R.id.poster);
 
-        program_listview = (ListView) findViewById(R.id.program_listview);
 
+        programView = (TextView) findViewById(R.id.program);
+        programView.setText("");
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
         Intent intent = getIntent();
-        String movie_id = intent.getExtras().getString("movie_id");
+        movie_id = intent.getExtras().getString("movie_id");
         if(intent == null)
             return null;
 
@@ -115,6 +117,16 @@ public class MovieDetailActivity extends ActionBarActivity implements LoaderMana
                 .load(data.getString(data.getColumnIndexOrThrow("poster")))
                 .resize(175,271)
                 .into(poster);
+
+        Cursor cursor = getContentResolver().query(
+                TablesContract.ProgramEntry.buildMovieProgramUri(movie_id),
+                PROGRAM_COLUMNS,
+                "movie_id=?",
+                new String[]{movie_id},
+                null);
+        while(cursor.moveToNext()){
+            programView.append(cursor.getString(COL_HOUR) + " ");
+        }
     }
 
     @Override

@@ -22,7 +22,7 @@ public class SplashScreen extends Activity {
         setContentView(R.layout.activity_splash_screen);
 
         updateWeather();
-        ///updateCinemaService();
+        updateCinemaService();
 
         new Handler().postDelayed(new Runnable() {
             @Override

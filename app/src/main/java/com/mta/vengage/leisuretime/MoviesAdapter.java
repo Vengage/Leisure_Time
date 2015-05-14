@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 /**
  * Created by Vasile Cosovanu on 5/10/2015.
  * <p/>
- * CursorAdapter for MovieActivity
+ * CursorAdapter for CinemaActivity
  */
 public class MoviesAdapter extends CursorAdapter {
 

@@ -58,7 +58,7 @@ public class Main extends Activity {
         movie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), MovieActivity.class);
+                Intent intent = new Intent(getBaseContext(), CinemaActivity.class);
                 startActivity(intent);
             }
         });
@@ -78,7 +78,7 @@ public class Main extends Activity {
                 cursor.moveToNext();
                 if (cursor != null) {
                     String locationSetting = Utility.getPreferredLocation(getApplicationContext());
-                    Intent intent = new Intent(getApplicationContext(), DetailActivity.class)
+                    Intent intent = new Intent(getApplicationContext(), WeatherDetailActivity.class)
                             .setData(TablesContract.WeatherEntry.buildWeatherLocationWithDate(
                                     locationSetting, cursor.getLong(COL_WEATHER_DATE)
                             ));
